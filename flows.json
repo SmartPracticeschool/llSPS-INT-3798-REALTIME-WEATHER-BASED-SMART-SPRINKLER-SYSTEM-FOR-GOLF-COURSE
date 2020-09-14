@@ -1,0 +1,516 @@
+[
+    {
+        "id": "42ed316a.9722c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e1d1aea0.a0737",
+        "type": "ibmiot in",
+        "z": "42ed316a.9722c",
+        "authentication": "apiKey",
+        "apiKey": "da32b8c5.7980c8",
+        "inputType": "evt",
+        "logicalInterface": "",
+        "ruleId": "",
+        "deviceId": "9502673405",
+        "applicationId": "",
+        "deviceType": "rasberrypi",
+        "eventType": "+",
+        "commandType": "",
+        "format": "json",
+        "name": "IBM IoT",
+        "service": "registered",
+        "allDevices": "",
+        "allApplications": "",
+        "allDeviceTypes": "",
+        "allLogicalInterfaces": "",
+        "allEvents": true,
+        "allCommands": "",
+        "allFormats": "",
+        "qos": 0,
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "5ea9c943.c345b8",
+                "64f66066.cf686",
+                "372d18f0.89c998",
+                "ffb129b5.dc8b88",
+                "2c913baa.671d74"
+            ]
+        ]
+    },
+    {
+        "id": "5ea9c943.c345b8",
+        "type": "function",
+        "z": "42ed316a.9722c",
+        "name": "temperature",
+        "func": "global.set('temperature',msg.payload.Temperature)\nmsg.payload=msg.payload.Temperature;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "3c4c4e96.1f97f2",
+                "92657da7.3fd58"
+            ]
+        ]
+    },
+    {
+        "id": "3c4c4e96.1f97f2",
+        "type": "debug",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "64f66066.cf686",
+        "type": "function",
+        "z": "42ed316a.9722c",
+        "name": "humidity",
+        "func": "global.set('humidity',msg.payload.Humidity)\nmsg.payload=msg.payload.Humidity;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "3c4c4e96.1f97f2",
+                "a957553a.881b18"
+            ]
+        ]
+    },
+    {
+        "id": "92657da7.3fd58",
+        "type": "ui_gauge",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "group": "f9e96a4b.cfe9a8",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "temperature",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 690,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a957553a.881b18",
+        "type": "ui_gauge",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "group": "f9e96a4b.cfe9a8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 680,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c611b94a.bbfb18",
+        "type": "ui_button",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "group": "f9e96a4b.cfe9a8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": " MOTOR ON",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"command\":\"MOTOR ON\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 190,
+        "y": 560,
+        "wires": [
+            [
+                "4296a995.ab1c78",
+                "630f78dc.f413b8"
+            ]
+        ]
+    },
+    {
+        "id": "43a2d2b6.979b4c",
+        "type": "ui_button",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "group": "f9e96a4b.cfe9a8",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "MOTOR OFF",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "{\"command\":\"MOTOR OFF\"}",
+        "payloadType": "json",
+        "topic": "",
+        "x": 200,
+        "y": 640,
+        "wires": [
+            [
+                "4296a995.ab1c78",
+                "630f78dc.f413b8"
+            ]
+        ]
+    },
+    {
+        "id": "4296a995.ab1c78",
+        "type": "ibmiot out",
+        "z": "42ed316a.9722c",
+        "authentication": "apiKey",
+        "apiKey": "da32b8c5.7980c8",
+        "outputType": "cmd",
+        "deviceId": "9502673405",
+        "deviceType": "rasberrypi",
+        "eventCommandType": "home",
+        "format": "json",
+        "data": "data",
+        "qos": 0,
+        "name": "IBM IoT",
+        "service": "registered",
+        "x": 540,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "fb23d4e2.fd74f8",
+        "type": "http in",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "url": "/data",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 360,
+        "wires": [
+            [
+                "2adb2f29.1895a"
+            ]
+        ]
+    },
+    {
+        "id": "62acdf68.076",
+        "type": "http response",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 550,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "2adb2f29.1895a",
+        "type": "function",
+        "z": "42ed316a.9722c",
+        "name": "data",
+        "func": "msg.payload={'temperature':global.get(\"temperature\"),'humidity':global.get(\"humidity\"),'vibration':global.get(\"vibration\"),'current':global.get(\"current\"),'soilmoisture':global.get(\"soilmoisture\")}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "62acdf68.076"
+            ]
+        ]
+    },
+    {
+        "id": "ffb129b5.dc8b88",
+        "type": "function",
+        "z": "42ed316a.9722c",
+        "name": "soilmoisture",
+        "func": "global.set('soilmoisture',msg.payload.soilmoisture)\nmsg.payload=msg.payload.soilmoisture;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 40,
+        "wires": [
+            [
+                "3c4c4e96.1f97f2",
+                "caff0524.d1e058"
+            ]
+        ]
+    },
+    {
+        "id": "2c913baa.671d74",
+        "type": "function",
+        "z": "42ed316a.9722c",
+        "name": "vibration",
+        "func": "global.set('vibration',msg.payload.vibration)\nmsg.payload=msg.payload.vibration;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "3c4c4e96.1f97f2",
+                "226b9719.e00d38"
+            ]
+        ]
+    },
+    {
+        "id": "372d18f0.89c998",
+        "type": "function",
+        "z": "42ed316a.9722c",
+        "name": "current",
+        "func": "global.set('current',msg.payload.current)\nmsg.payload=msg.payload.current;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "3c4c4e96.1f97f2",
+                "ad0cb453.fd6668"
+            ]
+        ]
+    },
+    {
+        "id": "caff0524.d1e058",
+        "type": "ui_gauge",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "group": "f9e96a4b.cfe9a8",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "soilmoisture",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 720,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "226b9719.e00d38",
+        "type": "ui_gauge",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "group": "f9e96a4b.cfe9a8",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "vibration",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 690,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ad0cb453.fd6668",
+        "type": "ui_gauge",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "group": "f9e96a4b.cfe9a8",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "current",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 680,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "a6a91db4.3a84e",
+        "type": "http in",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "url": "/command",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 440,
+        "wires": [
+            [
+                "38d221fa.e6242e"
+            ]
+        ]
+    },
+    {
+        "id": "b5fc4a76.4adf08",
+        "type": "http response",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "630f78dc.f413b8",
+        "type": "debug",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "38d221fa.e6242e",
+        "type": "function",
+        "z": "42ed316a.9722c",
+        "name": "command",
+        "func": "msg.payload=msg.payload.command\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "b5fc4a76.4adf08",
+                "b8e746b9.55bcb8"
+            ]
+        ]
+    },
+    {
+        "id": "b8e746b9.55bcb8",
+        "type": "debug",
+        "z": "42ed316a.9722c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "da32b8c5.7980c8",
+        "type": "ibmiot",
+        "z": "",
+        "name": "",
+        "keepalive": "60",
+        "serverName": "",
+        "cleansession": true,
+        "appId": "",
+        "shared": false
+    },
+    {
+        "id": "f9e96a4b.cfe9a8",
+        "type": "ui_group",
+        "z": "",
+        "name": "Default",
+        "tab": "d40fcb75.0c4948",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "d40fcb75.0c4948",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
